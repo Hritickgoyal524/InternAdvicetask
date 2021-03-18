@@ -23,6 +23,7 @@ class _HomeState extends State<Home> {
       "time": DateTime.now().toString()
 
     });
+   
   }
 
   getAdvice() async {
@@ -99,7 +100,7 @@ class _HomeState extends State<Home> {
                       col = Colors.red;
                     });
 
-                    getAdvice();
+                   await getAdvice();
                     await insertdata();
                   },
                   child: Text("Take Advice",
