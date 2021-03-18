@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:internadvice_task/history.dart';
 import 'package:internadvice_task/modal.dart';
 import 'package:provider/provider.dart';
 
@@ -66,10 +65,7 @@ class Home extends StatelessWidget {
                     child: FlatButton(
                         onPressed: () async{
                           await advice.getadvicedata();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => History()));
+                          Navigator.pushNamed(context, '/second');;
                         },
                         color: Colors.blueAccent,
                         padding:

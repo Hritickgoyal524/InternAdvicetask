@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internadvice_task/history.dart';
 import 'package:internadvice_task/home.dart';
 import 'package:internadvice_task/modal.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +21,13 @@ class MyApp extends StatelessWidget {
         
         primarySwatch: Colors.blue,
       ),
-      home: Home()
-  
+     initialRoute: '/',
+  routes: {
+    // When navigating to the "/" route, build the FirstScreen widget.
+    '/': (context) => Home(),
+    // When navigating to the "/second" route, build the SecondScreen widget.
+    '/second': (context) => History(),
+  },
   ));
   }
 }
