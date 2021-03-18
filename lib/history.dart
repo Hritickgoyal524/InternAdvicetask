@@ -49,6 +49,7 @@ class _HistoryState extends State<History> {
             load == null
                 ? CircularProgressIndicator()
                 : ListView.builder(
+                  reverse: true,
                     padding: EdgeInsets.symmetric(
                       horizontal: 14,
                     ),
