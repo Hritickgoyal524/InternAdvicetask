@@ -1,30 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:internadvice_task/modal.dart';
+import 'package:provider/provider.dart';
 
-import 'database.dart';
 
-class History extends StatefulWidget {
-  History({Key key}) : super(key: key);
 
-  @override
-  _HistoryState createState() => _HistoryState();
-}
+class History extends StatelessWidget {
 
-class _HistoryState extends State<History> {
-  @override
-  List<Map<String, dynamic>> query = [];
-  final DbAdvice dbmanager = new DbAdvice();
-  bool load = false;
-  getdata() async {
-    query = await dbmanager.getadvice();
-    load = true;
-    setState(() {});
-  }
+ 
 
-  void initState() {
-    getdata();
-    super.initState();
-  }
-
+  
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,31 +31,29 @@ class _HistoryState extends State<History> {
                       fontWeight: FontWeight.w700)),
             ),
             SizedBox(height: 40),
-            load == null
-                ? CircularProgressIndicator()
-                : ListView.builder(
+             Consumer<Advice>(
+ builder:(context,advice,child){
+   return  ListView.builder(
                   reverse: true,
                     padding: EdgeInsets.symmetric(
                       horizontal: 14,
                     ),
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: query.length,
+                    itemCount: advice.data.length,
                     itemBuilder: (context, index) {
                       return Container(
                           margin: EdgeInsets.symmetric(vertical: 10),
                           decoration: BoxDecoration(
                               color: Colors.blueAccent,
                               borderRadius: BorderRadius.circular(25)),
-                          height: 150,
+                          height: 170,
                           child: Column(children: [
                             Container(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 20),
                               child: Text(
-                                  query[index]['name'] == null
-                                      ? ""
-                                      : query[index]['name'],
+                                advice.data[index]['name'],
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -83,14 +66,15 @@ class _HistoryState extends State<History> {
                                       horizontal: 10,
                                     ),
                                     child: Text(
-                                      query[index]['time'],
+                                      advice.data[index]['time'],
                                       style: TextStyle(
                                           color: Colors.orangeAccent,
                                           fontSize: 17,
                                           fontWeight: FontWeight.w500),
                                     )))
                           ]));
-                    })
+                    });
+ })
           ],
         )));
   }
